@@ -5,92 +5,17 @@
         <div class="container top-container">
           <div class="row align-items-center">
   
-            <div class="col-xl-8">
+            <div class="col-xl-12">
               <div class="card border-0">
-                <div class="card-body">
-                  <h5 class="card-title">فعالیت ها</h5>
-                </div>
-                <!-- <img src="@/assets/chart.jpg" alt="..."> -->
-                <div style="height: 300px !important;">
-                  <LineChart/>
-  
+                <div class="card-body text-center">
+                  <h2 class="card-title">فعالیت ها</h2>
                 </div>
               </div>
             </div>
   
-            <div class="col-xl-4 mt-5">
-              <!-- <img src="@/assets/pie.png" alt="" class="img-fluid"> -->
-              <PieChart />
-            </div>
-  
-          </div>
-          <div class="">
-              <button @click="toggleDepWith()" class="btn btn-outline-secondary w-50" id="depwith">برداشت ها</button>
           </div>
 
           <div class="row mt-1">
-            <div v-if="toggledepo" class="col-xl-6">
-              
-              <!-- loding -->
-              <div v-if="depWithDataLoading" class="spinner-grow text-dark d-block mx-auto" role="status"></div>
-
-              <table v-if="!depWithDataLoading" class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">مقدار</th>
-                    <th scope="col">آتوریتی</th>
-                    <th scope="col">ایز پی</th>
-                    <th scope="col">گیت وی</th>
-                    <th scope="col">رف آیدی</th>
-                    <th scope="col">تاریخ</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr v-for="dep,index in depositData">
-                    <th scope="row">{{index}}</th>
-                    <td>{{dep.amount}}</td>
-                    <td>{{dep.authority}}</td>
-                    <td>{{dep.is_pay}}</td>
-                    <td>{{dep.gateway}}</td>
-                    <td>{{dep.ref_id}}</td>
-                    <td>{{dep.created_at}}</td>
-                  </tr>
-
-                </tbody>
-              </table>
-            </div>
-
-            <div v-if="!toggledepo" class="col-xl-6">
-
-              <!-- loding -->
-              <div v-if="depWithDataLoading" class="spinner-grow text-dark d-block mx-auto" role="status"></div>
-
-              <table v-if="!depWithDataLoading" class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">مقدار</th>
-                    <!-- <th scope="col">هش</th> -->
-                    <th scope="col">ولت آدرس</th>
-                    <th scope="col">تمام شده</th>
-                    <th scope="col">تاریخ ساخت</th>
-                    <th scope="col">تاریخ اتمام</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr v-for="wit,index in withdrawData">
-                    <th scope="row">{{index}}</th>
-                    <td>{{wit.amount}}</td>
-                    <!-- <td>{{wit.hash}}</td> -->
-                    <td>{{wit.wallet_address}}</td>
-                    <td>{{wit.is_done}}</td>
-                    <td>{{wit.created_at}}</td>
-                    <td>{{wit.done_at}}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
 
             <div class="col-xl-6">
               <div class="row ">
@@ -254,7 +179,37 @@
                 </div>
               </div>
             </div>
-          </div>
+            <div class="col-xl-6">
+
+              <!-- loading -->
+              <div v-if="tradeHistoryLoading" class="spinner-grow text-dark d-block mx-auto" role="status"></div>
+
+              <table v-if="!tradeHistoryLoading" class="table table-dark table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">نماد</th>
+                    <th scope="col">مقدار</th>
+                    <th scope="col">سود</th>
+                    <th scope="col">درصد سود</th>
+                    <th scope="col">آیدی درخواست</th>
+                    <th scope="col">زمان ساخت</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="trade in tradeHistoryData">
+                    <th scope="row">{{trade.symbol}}</th>
+                    <td>{{trade.amount}}</td>
+                    <td>{{trade.profit}}</td>
+                    <td>{{trade.profit_percent}}</td>
+                    <td>{{trade.order_id}}</td>
+                    <td>{{trade.created_at}}</td>
+                  </tr>
+                </tbody>
+              </table>       
+
+            </div>
+
+          </div>          
         </div>
       </div>
     </div>
@@ -268,46 +223,17 @@
   import { useStore } from 'vuex'
   import { useRoute, useRouter } from 'vue-router'
   import SideBar from '@/components/Sidebar.vue'
-  import PieChart from '@/components/PieChart.vue'
-  import LineChart from '@/components/LineChart.vue'
   
   export default {
     components:{
       SideBar,
-      PieChart,
-      LineChart,
     },
       setup() {
       const store = useStore()
       const router = useRouter()
 
-      let depositData = ref('')
-      let withdrawData = ref('')
       let tradeHistoryData = ref('')
-
-      let depWithDataLoading = ref(false)
-
       let tradeHistoryLoading = ref()
-
-      let toggledepo = ref(true)
-
-      function getDepWithData(){
-        depWithDataLoading.value = true
-        axios
-        .get('financial/transactionList')
-        .then(response => {
-          depWithDataLoading.value = false
-          depositData.value = response.data.deposit
-          withdrawData.value = response.data.withdraw
-
-          console.log(depositData.value);
-        })
-        .catch(error => {
-          depWithDataLoading.value = false
-          console.log(error.response)
-        })
-      }
-      getDepWithData()
 
       function getTradeHistory(){
         tradeHistoryLoading.value = true
@@ -324,24 +250,9 @@
       }
       getTradeHistory()
   
-      function toggleDepWith(){
-        if(toggledepo.value){
-            toggledepo.value = false
-            document.getElementById('depwith').innerHTML = 'واریزها'
-        } else {
-            toggledepo.value = true
-            document.getElementById('depwith').innerHTML = 'برداشت ها'
-        }
-      }
-  
       return{
-        toggledepo,
-        withdrawData,
-        depositData,
-        depWithDataLoading,
         tradeHistoryData,
         tradeHistoryLoading,
-        toggleDepWith
       }
       
     }
@@ -411,10 +322,9 @@
       background: linear-gradient(135deg, #289cf5, #84c0ec) !important;
       color: #fff;
   }
-
-  .table {
+	.table {
     display: block;
     overflow-x: auto;
     white-space: nowrap;
-  }
+  }	
   </style>

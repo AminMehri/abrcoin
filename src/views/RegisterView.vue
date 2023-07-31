@@ -36,7 +36,7 @@
 						<label for="OTPInput" class="form-label">کد ارسالی</label>
 						<input 
 							v-model="OTP" 
-							type="password" 
+							type="text" 
 							class="form-control" 
 							id="OTPInput" 
 						>
@@ -50,6 +50,20 @@
 							class="form-control" 
 							id="passwordInput" 
 							:class="{'is-invalid':passwordE===true, 'is-valid':passwordE===false}"
+						>
+						<div class="invalid-feedback">
+							{{ passwordEM }}
+						</div>
+					</div>
+
+					<div v-if="enterNumber" class="mt-3 mb-2">
+						<label for="passwordConfirmInput" class="form-label">تکرار رمزعبور</label>
+						<input 
+							v-model="passwordConfirm" 
+							type="password" 
+							class="form-control" 
+							id="passwordConfirmInput" 
+							:class="{'is-invalid':passwordConfirmE===true, 'is-valid':passwordConfirmE===false}"
 						>
 					</div>
 
@@ -80,7 +94,10 @@ export default {
 		let phoneNumberE = ref()
 		let phoneNumberEM = ref('')
 		let password = ref('')
+		let passwordConfirm = ref('')
 		let passwordE = ref()
+		let passwordConfirmE = ref('')
+		let passwordEM = ref('')
 		let OTP = ref('')
 	
 		let enterNumber = ref(false)
@@ -132,6 +149,30 @@ export default {
 					access = true
 			}
 
+			if(password.value.length < 8){
+				passwordE.value = true
+				access = false
+				if(password.value.length == 0){
+					passwordEM.value = 'رمزعبور اجباری است'
+				} else {
+					passwordEM.value = 'رمزعبور باید بیشتر از ۷ کاراکتر باشد'
+				}
+			} else {
+				passwordE.value = false
+				passwordEM.value = ''
+			}
+
+			if(password.value != passwordConfirm.value){
+				access = false
+				passwordE.value = true
+				passwordConfirmE.value = true
+				passwordEM.value = 'رمزعبور و تکرار آن با هم مطابقت ندارد'
+			} else {
+				if(!passwordE.value && passwordConfirmE.value) {
+					access = true
+				}
+			}
+
 			if(access) {
 				fullScreenLoading.value = true
 				axios
@@ -146,7 +187,8 @@ export default {
 						icon: 'success',
 						text: 'شما با موفقیت ثبت نام کردید',
 					})
-					router.push('/login')
+					store.commit('login', response.data.access)
+					router.push('/dashboard')
 				})
 				.catch(error => {
 					fullScreenLoading.value = false
@@ -162,6 +204,9 @@ export default {
 			phoneNumberEM,
 			password,
 			passwordE,
+			passwordConfirm,
+			passwordConfirmE,
+			passwordEM,
 			OTP,
 			enterNumber,
 			fullScreenLoading,

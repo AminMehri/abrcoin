@@ -3,10 +3,24 @@
 	<div class="sidebar shadow-lg">
 		<router-link class="hover-underline" to="/dashboard">داشبورد</router-link>
 		<router-link class="hover-underline" to="/dashboard/profile">پروفایل</router-link>
-		<router-link class="hover-underline" to="/">واریز</router-link>
-		<router-link class="hover-underline" to="/">برداشت</router-link>
 		<router-link class="hover-underline" to="/wallets">کیف پول ها</router-link>
-		<router-link class="hover-underline" to="/trade-history">تاریخچه معاملات</router-link>
+
+    <a @click="collapseOpen = !collapseOpen" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+      مالی
+      <svg v-if="!collapseOpen" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-arrow-down-short text-white" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4z"/>
+      </svg>
+
+      <svg v-if="collapseOpen" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-arrow-up-short" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5z"/>
+      </svg>
+    </a>
+    
+    <div class="collapse" id="collapseExample">
+      <router-link class="hover-underline me-md-4" to="/deposit">واریزها</router-link>
+		  <router-link class="hover-underline me-md-4" to="/withdraw">برداشت ها</router-link>
+    </div>
+
 		<div class="dropdown hover-underline" id="username-dropdown">
 			<a class="dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
 				امین مهری
@@ -30,6 +44,8 @@ export default {
 		const store = useStore()
     const router = useRouter()
 
+    let collapseOpen = ref(false)
+
 		function doLogout(){
       store.commit('logout')
       router.push('/')
@@ -37,6 +53,7 @@ export default {
 
 		return{
 			doLogout,
+      collapseOpen
 		}
 
 	}

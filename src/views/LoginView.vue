@@ -44,6 +44,28 @@
 
 				</form>
 
+				<!-- forget pass -->
+				<button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
+					رمزعبورمو فراموش کردم!
+				</button>
+
+				<!-- Modal forget pass -->
+				<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close-modal"></button>
+							</div>
+							<div class="modal-body">
+								<input v-model="email" class="w-100 form-control" type="text" placeholder="لطفا ایمیل خود را وارد کنید">
+							</div>
+							<div class="modal-footer">
+								<button @click="doForgetPassword()" type="button" class="btn btn-outline-primary">تایید ایمیل</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
 			</div>
 		</div>
 	</div>
@@ -66,6 +88,8 @@ export default {
 		let phoneNumberEM = ref('')
 		let password = ref('')
 		let passwordE = ref()
+
+		let email = ref('')
 
 		let fullScreenLoading = ref(false)
 
@@ -91,7 +115,7 @@ export default {
 				.then(response => {
 					fullScreenLoading.value = false
 					store.commit('login', response.data.access)
-					router.push('/')
+					router.push('/dashboard')
 				})
 				.catch(error => {
 					fullScreenLoading.value = false
@@ -102,6 +126,27 @@ export default {
 			}
 		}   
 
+		function doForgetPassword(){
+			fullScreenLoading.value = true
+			document.getElementById('close-modal').click()
+			axios
+			.post('account/forgetPassword', {
+				email: email.value,
+			})
+			.then(response => {
+				Swal.fire({
+					icon: 'success',
+					title: 'هورا!!!',
+					text: 'ایمیل برای شما ارسال شد.',
+				})
+				fullScreenLoading.value = false
+				email.value = ''
+			})
+			.catch(error => {
+				fullScreenLoading.value = false
+			})
+		}
+
 		return {
 			phoneNumber,
 			phoneNumberE,
@@ -109,7 +154,9 @@ export default {
 			password,
 			passwordE,
 			fullScreenLoading,
-			doLogin
+			email,
+			doLogin,
+			doForgetPassword,
 		}
 	}
 }

@@ -1,5 +1,5 @@
 <template>
-
+    <div v-if="fullScreenLoading" class="fullscreen-loading">Loading&#8230;</div>
 </template>
 
 
@@ -16,6 +16,8 @@ export default {
         const store = useStore()
         const route = useRoute();
         const router = useRouter();
+
+        let fullScreenLoading = ref(true)
         
         function getData(){
             axios
@@ -31,19 +33,21 @@ export default {
                     timer: 2000,
                     showConfirmButton: false,
                 })
-                router.push('/dashboard/profile')
+                fullScreenLoading.value = false
+                router.push('/dashboard/profile')    
             })
             .catch(error => {
-                store.commit('logout')
-                router.push('/profile')
+                fullScreenLoading.value = false
+                router.push('/dashboard/profile')
             })
+            
         }
         getData()
 
 
 		return {
-            getData
-
+            getData,
+            fullScreenLoading,
 		}
     
 	},

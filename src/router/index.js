@@ -5,11 +5,12 @@ import HomeView from '../views/HomeView.vue'
 import LoginView from '../views/LoginView.vue'
 import RegisterView from '../views/RegisterView.vue'
 import ProfileView from '../views/ProfileView.vue'
-import dashboard from '../views/dashboardView.vue'
+import Dashboard from '../views/DashboardView.vue'
 import VerifyEmailView from '../views/VerifyEmailView.vue'
 import WalletsView from '../views/WalletsView.vue'
-import TradeHistory from '../views/TradeHistoryView.vue'
-
+import WithdrawView from '../views/WithdrawView.vue'
+import DepositView from '../views/DepositView.vue'
+import SetPasswordView from '../views/SetPasswordView.vue'
 
 
 const routes = [
@@ -39,7 +40,7 @@ const routes = [
   {
     path: '/dashboard',
     name: 'dashboard',
-    component: dashboard,
+    component: Dashboard,
     meta: { loginRequired: true }
   },
   {
@@ -49,15 +50,26 @@ const routes = [
     meta: { loginRequired: true }
   },
   {
-    path: '/trade-history',
-    name: 'trade-history',
-    component: TradeHistory,
+    path: '/deposit',
+    name: 'deposit',
+    component: DepositView,
+    meta: { loginRequired: true }
+  },
+  {
+    path: '/withdraw',
+    name: 'withdraw',
+    component: WithdrawView,
     meta: { loginRequired: true }
   },
   {
     path: '/verify-email/:token',
     name: 'verify-email',
     component: VerifyEmailView,
+  },
+  {
+    path: '/set-password/:token',
+    name: 'set-password',
+    component: SetPasswordView,
   },
 ]
 
@@ -75,7 +87,7 @@ router.beforeEach((to, from, next) => {
     }
   }else if (to.matched.some(record => record.meta.loginRedirect)) {
     if (store.state.isAuthenticated) {
-      next("/dashboard/profile")
+      next("/dashboard")
     } else {
       next()
     }

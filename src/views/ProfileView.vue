@@ -43,7 +43,7 @@
 						</p>
 						<a class="btn btn-primary disabled placeholder col-6" aria-disabled="true"></a>
 					</div>
-					<button class="btn fw-bold btn-outline-warning my-2 w-100" data-bs-toggle="modal" data-bs-target="#staticBackdrop">احراز هویت</button>
+					<button v-if="showVerifybutton" class="btn fw-bold btn-outline-warning my-2 w-100" data-bs-toggle="modal" data-bs-target="#staticBackdrop">احراز هویت</button>
 
 				</div>
 
@@ -150,17 +150,22 @@ export default {
 	
 	let updateInfoLoading = ref(false)
 
+	let showVerifybutton = ref(false)
+
 	function getProfileInfo(){
+		showVerifybutton.value = false
 		verified.value = false
 		axios
 		.get('account/profile')
 		.then(response => {
 			verified.value = true
+			showVerifybutton.value = false
 			profileData.value = response.data.data 
 			console.log(profileData.value);
 		})
 		.catch(error => {
 			verified.value = false
+			showVerifybutton.value = true
 			console.log(error.response);
 		})
 	}
@@ -220,6 +225,7 @@ export default {
 		updateIdNumber,
 		updateEmail,
 		updateInfoLoading,
+		showVerifybutton,
 		updateInfo,
 	}
 	
