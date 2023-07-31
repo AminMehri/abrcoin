@@ -1,35 +1,50 @@
 <template>
-	<!-- The sidebar -->
-	<div class="sidebar shadow-lg">
-		<router-link class="hover-underline" to="/dashboard">داشبورد</router-link>
-		<router-link class="hover-underline" to="/dashboard/profile">پروفایل</router-link>
-		<router-link class="hover-underline" to="/wallets">کیف پول ها</router-link>
+  <!-- The sidebar -->
+  <div class="sidebar">
+    <router-link class="bg-hover bold" to="/" style="font-size: larger;"> 
+      <img src="../assets/logo192.png" class="d-inline" width="30" alt="">
+      ابرکوین 
+    </router-link>
+    <br>
+    <router-link class="bg-hover" to="/dashboard">
+      <i class="fa fa-dashboard"></i> 
+      داشبورد
+    </router-link>
+    
+    <router-link class="bg-hover" to="/dashboard/profile">
+      <i class="fa fa-user"></i>
+      پروفایل
+    </router-link>
 
-    <a @click="collapseOpen = !collapseOpen" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+    <a @click="collapseOpen = !collapseOpen" data-bs-toggle="collapse" href="#collapseExample" class="bg-hover">
+      <i class="fa fa-coin"></i>
       مالی
-      <svg v-if="!collapseOpen" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-arrow-down-short text-white" viewBox="0 0 16 16">
-        <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4z"/>
-      </svg>
-
-      <svg v-if="collapseOpen" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-arrow-up-short" viewBox="0 0 16 16">
-        <path fill-rule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5z"/>
-      </svg>
+      <i :class="{'fa-rotate-180': collapseOpen, 'fa fa-angle-down': true}"></i>
     </a>
     
-    <div class="collapse" id="collapseExample">
-      <router-link class="hover-underline me-md-4" to="/deposit">واریزها</router-link>
-		  <router-link class="hover-underline me-md-4" to="/withdraw">برداشت ها</router-link>
+    <div class="collapse" id="collapseExample" style="background-color: rgb(115,115,115);">
+      <router-link class="bg-hover me-md-4" to="/deposit">
+        <i class="fa fa-sign-in"></i>
+        واریزها
+      </router-link>
+		  <router-link class="bg-hover me-md-4" to="/withdraw">
+        <i class="fa fa-sign-out"></i>
+        برداشت ها
+      </router-link>
     </div>
-
-		<div class="dropdown hover-underline" id="username-dropdown">
-			<a class="dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-				امین مهری
-			</a>
-			<ul class="dropdown-menu bg-dark">
-				<li><a @click="doLogout()" href="#" class="dropdown-item">خروج</a></li>
-			</ul>
-		</div>
-	</div>
+    
+    <router-link class="bg-hover" to="/wallets">
+      <i class="fa fa-wallet"></i>
+      کیف پول ها
+    </router-link>
+    <router-link class="bg-hover" to="/tickets">
+      <i class="fa fa-headset"></i>
+      تیکت ها
+    </router-link>
+    <button class="btn btn-sm btn-danger px-3" @click="doLogout" style="margin-right: 42px; margin-top: 30px;">
+      خروج
+    </button>
+  </div>
 </template>
 
 <script>
@@ -63,12 +78,12 @@ export default {
 <style>
  .sidebar {
   margin: 0;
-  padding: 0;
-  width: 200px;
-  background-color: #000000;
+  padding: 10px 40px 0px 0px;
+  width: 240px;
+  background-color: #494949;
   position: fixed;
   height: 100%;
-  overflow: auprofileto;
+  overflow: auto;
 }
 
 
@@ -98,13 +113,22 @@ export default {
 .sidebar a {
   display: block;
   color: rgb(255, 255, 255);
-  padding: 8px 16px;
+  padding: 9.5px 16px;
 }
 #username-dropdown{
-	display: block;
+  display: block;
 }
 .sidebar a.router-link-exact-active {
-  color: cyan;
+  color: #1095c1;
+}
+
+.bg-hover{
+  background: linear-gradient(#1095c1 0 0) var(--p, 0) / var(--p, 0) no-repeat;
+  transition: .45s, background-position 0s;
+}
+.bg-hover:hover:not(.router-link-active) {
+  --p: 100%;
+  color: #fff;
 }
 
 .content {
@@ -118,11 +142,11 @@ export default {
     width: 100%;
     height: auto;
     /* position: relative; */
-		z-index: 5;
+    z-index: 5;
   }
   .sidebar a {float: right;}
   .content {margin-right: 0;}
-	.top-container{margin-top: 4rem;}
+  .top-container{margin-top: 4rem;}
 }
 
 @media screen and (max-width: 674px) {
@@ -133,7 +157,7 @@ export default {
   .sidebar {
     position:static;
   }
-	/* .top-container{margin-top: 16rem;} */
+  /* .top-container{margin-top: 16rem;} */
 } 
 
 </style>

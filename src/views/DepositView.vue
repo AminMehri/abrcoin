@@ -3,7 +3,7 @@
 		<SideBar />
 		<div class="content">
 			<div class="container top-container">
-				<h1>واریز</h1>
+				<h2 class="bold">واریز</h2>
 
 				<!-- loding -->
 				<div v-if="depWithDataLoading" class="spinner-grow text-dark d-block mx-auto" role="status"></div>
@@ -34,7 +34,31 @@
 					</tbody>
 				</table>
 				
-				<button class="btn btn-info w-25">افزایش موجودی</button>
+				<button class="btn btn-info px-5" data-bs-toggle="modal" data-bs-target="#newDepositModal"> افزایش موجودی </button>
+
+	
+				<div class="modal fade" id="newDepositModal" tabindex="-1">
+					<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="staticBackdropLabel">اضافه کردن کیف پول</h5>
+								</div>
+								<div class="modal-body">
+
+									<input v-model="amount" type="text" class="form-control w-50 mx-auto" placeholder="مقدار (USDT)">
+								
+									<div class="modal-footer pb-0 mt-4">
+										<button id="closeButton" type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
+										<button v-if="!modalLoading" @click="createGateway" class="btn fw-bold bg-success text-light px-3">پرداخت</button>
+										<button v-else class="btn fw-bold bg-success text-light px-2" disabled> 
+											پرداخت
+											<span class="spinner-grow spinner-grow-sm text-dark"></span>
+										</button>
+									</div>
+								</div>
+						</div>
+					</div>
+				</div>
 
 			</div>
 		</div>
@@ -56,7 +80,9 @@ export default{
 	},
 	setup(){
 		let depositData = ref('')
+		let amount = ref('')
 		let depWithDataLoading = ref(false)
+		let modalLoading = ref(false)
 		
 		function getDepWithData(){
         depWithDataLoading.value = true
@@ -71,11 +97,26 @@ export default{
           console.log(error.response)
         })
       }
+	  function createGateway(){
+		modalLoading.value = true
+		axios.post("financial/deposit", {
+			"amount": amount.value, "gateway": "nowpayments"
+		}).then((res)=>{
+			modalLoading.value = false
+			alert(res.data.link)
+			window.location.replace(res.data.link)
+		}).catch(()=>{
+			modalLoading.value = false
+		})
+	  	}
       getDepWithData()
 
 		return{
 			depositData,
 			depWithDataLoading,
+			amount,
+			createGateway,
+			modalLoading,
 
 		}
 	}	

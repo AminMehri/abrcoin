@@ -1,9 +1,10 @@
 <template>
 	<div class="profile">
+		<div v-if="fullScreenLoading" class="fullscreen-loading">Loading&#8230;</div>
 		<SideBar />
 		<div class="content">
 			<div class="container top-container">
-				<h1>برداشت</h1>
+				<h2 class="bold">برداشت</h2>
 
 				<!-- loding -->
 				<div v-if="depWithDataLoading" class="spinner-grow text-dark d-block mx-auto" role="status"></div>
@@ -33,7 +34,31 @@
 					</tbody>
 				</table>
 
-				<button class="btn btn-warning w-25">درخواست برداشت از موجودی</button>
+				<button class="btn btn-warning w-25" @click="openModal"> درخواست برداشت از موجودی </button>
+
+				<div class="modal fade" id="withdrawModal" tabindex="-1">
+					<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="staticBackdropLabel">ثبت درخواست برداشت</h5>
+								</div>
+								<div class="modal-body">
+									{{walletsData}}
+
+									<input v-model="amount" type="text" class="form-control w-50 mx-auto" placeholder="مقدار (USDT)">
+								
+									<div class="modal-footer pb-0 mt-4">
+										<button id="closeButton" type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
+										<button v-if="!modalLoading" @click="createWithdraw" class="btn fw-bold bg-success text-light px-3">ثبت</button>
+										<button v-else class="btn fw-bold bg-success text-light px-2" disabled> 
+											ثبت
+											<span class="spinner-grow spinner-grow-sm text-dark"></span>
+										</button>
+									</div>
+								</div>
+						</div>
+					</div>
+				</div>
 
 			</div>
 		</div>
@@ -48,6 +73,7 @@ import Swal from 'sweetalert2'
 import { useStore } from 'vuex'
 import { useRoute, useRouter } from 'vue-router'
 import SideBar from '@/components/Sidebar.vue'
+import { Modal } from 'bootstrap';
 
 export default{
 	components: {
@@ -55,7 +81,13 @@ export default{
 	},
 	setup(){
 		let withdrawData = ref('')
+		let walletsData = ref('')
 		let depWithDataLoading = ref(false)
+		let fullScreenLoading = ref(false)
+		let modalLoading = ref(false)
+		let amount = ref('')
+		let network = ref('')
+		
 
 		function getDepWithData(){
 			depWithDataLoading.value = true
@@ -70,11 +102,46 @@ export default{
 				console.log(error.response)
 			})
 		}
+		function createWithdraw(wallet_id){
+			modalLoading.value = true
+			axios.post("financial/createWithdraw", {
+				"wallet_id": wallet_id, "amount": amount.value, "network": network.value
+			}).then((res)=>{
+				modalLoading.value = false
+				alert(res.data.link)
+				window.location.replace(res.data.link)
+			}).catch(()=>{
+				modalLoading.value = false
+			})
+		}
+
+		function openModal(){
+			fullScreenLoading.value = true
+			axios
+			.get('wallet/list')
+			.then(response => {
+				fullScreenLoading.value = false
+				walletsData.value = response.data.data
+				new Modal(document.getElementById("withdrawModal")).show()
+			})
+			.catch(error => {
+				fullScreenLoading.value = false
+				console.log(error.response)
+			})
+		}
+
 		getDepWithData()
 
 		return{
 			withdrawData,
 			depWithDataLoading,
+			modalLoading,
+			amount,
+			network,
+			createWithdraw,
+			openModal,
+			fullScreenLoading,
+			walletsData
 		}
 	}	
 }

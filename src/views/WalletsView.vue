@@ -1,11 +1,11 @@
 <template>
   <div class="profile">
 		<div v-if="fullScreenLoading" class="fullscreen-loading">Loading&#8230;</div>
-		<SideBar />
+		<SideBar/>
 		<div class="content">
 			<div class="container top-container">
-				<h1>کیف های پول</h1>
-				<button class="btn btn-info mt-3 mb-1" data-bs-toggle="modal" data-bs-target="#staticBackdrop">اضافه کردن کیف</button>
+				<h2 class="bold">کیف پول ها</h2>
+				<button class="btn btn-info mt-3 mb-1" data-bs-toggle="modal" data-bs-target="#addWalletModal">اضافه کردن کیف</button>
 
 				<!-- loading -->
 				<div v-if="walDataLoading" class="spinner-grow text-dark d-block mx-auto" role="status"></div>
@@ -26,20 +26,18 @@
 							<td>{{wallet.address}}</td>
 							<td>{{ wallet.network }}</td>
 							<td>{{wallet.created_at}}</td>
-							<td><button @click="deleteWallet(wallet.id)" class="btn btn-danger">حذف کیف</button></td>
-
+							<td><button @click="deleteWallet(wallet.id)" class="btn btn-danger" title="حذف"><i class="fa fa-trash"></i> </button></td>
 						</tr>
 					</tbody>
 				</table>
 
-				<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+				<div class="modal fade" id="addWalletModal" tabindex="-1">
 					<div class="modal-dialog">
 							<div class="modal-content">
 								<div class="modal-header">
 									<h5 class="modal-title" id="staticBackdropLabel">اضافه کردن کیف پول</h5>
 								</div>
 								<div v-if="!addWalletLoading" class="modal-body">
-
 
 									<div class="row g-3">
 
@@ -48,15 +46,15 @@
 											<input v-model="addAddress" type="text" class="form-control" id="inputAddress" >
 										</div>
 
-											<div class="col-md-6">
-													<label for="inputNetwork" class="form-label">نتورک</label>
-													<input v-model="addNetwork" type="text" class="form-control" id="inputNetwork" >
-											</div>
+										<div class="col-md-6">
+											<label for="inputNetwork" class="form-label">نتورک</label>
+											<input v-model="addNetwork" type="text" class="form-control" id="inputNetwork" >
+										</div>
 											
 									</div>
 									<div class="modal-footer">
-											<button id="closeButton" type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
-											<button @click="addWallet()" class="btn fw-bold bg-success">اضافه کردن</button>
+										<button id="closeButton" type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
+										<button @click="addWallet()" class="btn fw-bold bg-success text-light">اضافه کردن</button>
 									</div>
 								</div>
 								<div v-if="addWalletLoading" class="card modal-body" aria-hidden="true">
