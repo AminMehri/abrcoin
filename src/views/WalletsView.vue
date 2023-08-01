@@ -4,16 +4,14 @@
 		<SideBar/>
 		<div class="content">
 			<div class="container top-container">
-				<h2 class="bold">کیف پول ها</h2>
-				<button class="btn btn-info mt-3 mb-1" data-bs-toggle="modal" data-bs-target="#addWalletModal">اضافه کردن کیف</button>
+				<h2 class="bold mt-5 mb-4">کیف پول ها</h2>
 
 				<!-- loading -->
 				<div v-if="walDataLoading" class="spinner-grow text-dark d-block mx-auto" role="status"></div>
 
-				<table v-if="!walDataLoading" class="table table-dark table-hover">
+				<table v-if="!walDataLoading" class="shadow">
 					<thead>
 						<tr>
-							<th scope="col">آیدی</th>
 							<th scope="col">آدرس</th>
 							<th scope="col">نتورک</th>
 							<th scope="col">زمان ساخت</th>
@@ -22,7 +20,6 @@
 					</thead>
 					<tbody>
 						<tr v-for="wallet in walletsData">
-							<th scope="row">{{wallet.id}}</th>
 							<td>{{wallet.address}}</td>
 							<td>{{ wallet.network }}</td>
 							<td>{{wallet.created_at}}</td>
@@ -30,6 +27,10 @@
 						</tr>
 					</tbody>
 				</table>
+
+				<div class="d-flex">
+					<button class="btn btn-info my-4 mx-auto" data-bs-toggle="modal" data-bs-target="#addWalletModal">اضافه کردن کیف</button>
+				</div>
 
 				<div class="modal fade" id="addWalletModal" tabindex="-1">
 					<div class="modal-dialog">
@@ -194,6 +195,73 @@ export default {
     overflow-x: auto;
     white-space: nowrap;
   }	
+}
+
+
+@media screen and (max-width:992px) {
+ 	table {
+  		display:block
+ 	}
+	table>*,
+	table tr,
+	table td,
+	table th {
+		display:block;
+		word-break: break-all;
+	}
+	table thead {
+		display:none
+	}
+	table tbody tr {
+		height:auto;
+		padding:37px 0
+	}
+	table tbody tr td {
+		padding-left:40%!important;
+		margin-bottom:24px
+	}
+	table tbody tr td:last-child {
+		margin-bottom:0
+	}
+	table tbody tr td:before {
+		font-family:OpenSans-Regular;
+		font-size:14px;
+		color:#999;
+		line-height:1.2;
+		font-weight:unset;
+		position:absolute;
+		width:40%;
+		left:30px;
+		top:0
+	}
+	table tbody tr td:nth-child(1):before {
+		content:"آدرس"
+	}
+	table tbody tr td:nth-child(2):before {
+		content:"نتورک"
+	}
+	table tbody tr td:nth-child(3):before {
+		content:"زمان ساخت"
+	}
+	table tbody tr td:nth-child(4):before {
+		content:"حذف کردن"
+	}
+	.column4,
+	.column5,
+	.column6 {
+		text-align:left
+	}
+	.column4,
+	.column5,
+	.column6,
+	.column1,
+	.column2,
+	.column3 {
+		width:100%
+	}
+	tbody tr {
+		font-size:14px
+	}
 }
 
 </style>

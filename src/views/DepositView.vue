@@ -3,29 +3,32 @@
 		<SideBar />
 		<div class="content">
 			<div class="container top-container">
-				<h2 class="bold">واریز</h2>
+				<h2 class="bold mt-5 mb-3"> واریزها </h2>
 
 				<!-- loding -->
 				<div v-if="depWithDataLoading" class="spinner-grow text-dark d-block mx-auto" role="status"></div>
 
-				<table v-if="!depWithDataLoading" class="table">
+				<table v-if="!depWithDataLoading" class="shadow">
 					<thead>
 						<tr>
 							<th scope="col">#</th>
 							<th scope="col">مقدار</th>
-							<th scope="col">آتوریتی</th>
-							<th scope="col">ایز پی</th>
-							<th scope="col">گیت وی</th>
-							<th scope="col">رف آیدی</th>
+							<th scope="col">شناسه</th>
+							<th scope="col">پرداخت شده</th>
+							<th scope="col">درگاه</th>
+							<th scope="col">کد پیگیری</th>
 							<th scope="col">تاریخ</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr v-for="dep,index in depositData">
-							<th scope="row">{{index}}</th>
+							<td scope="row">{{index+1}}</td>
 							<td>{{dep.amount}}</td>
 							<td>{{dep.authority}}</td>
-							<td>{{dep.is_pay}}</td>
+							<td>
+								<i v-if="dep.is_pay" class="fa fa-circle-check text-success"></i>
+								<i v-else class="fa fa-times-circle text-danger"></i>
+							</td>
 							<td>{{dep.gateway}}</td>
 							<td>{{dep.ref_id}}</td>
 							<td>{{dep.created_at}}</td>
@@ -34,8 +37,10 @@
 					</tbody>
 				</table>
 				
-				<button class="btn btn-info px-5" data-bs-toggle="modal" data-bs-target="#newDepositModal"> افزایش موجودی </button>
-
+				<div class="d-flex">
+					<button class="btn btn-info px-5 my-4 mx-auto" data-bs-toggle="modal" data-bs-target="#newDepositModal"> افزایش موجودی </button>
+				</div>
+				
 	
 				<div class="modal fade" id="newDepositModal" tabindex="-1">
 					<div class="modal-dialog">
@@ -131,4 +136,80 @@ export default{
     white-space: nowrap;
   }	
 }
+
+@media screen and (max-width:992px) {
+ 	table {
+  		display:block
+ 	}
+	table>*,
+	table tr,
+	table td,
+	table th {
+		display:block;
+		word-break: break-all;
+	}
+	table thead {
+		display:none
+	}
+	table tbody tr {
+		height:auto;
+		padding:37px 0
+	}
+	table tbody tr td {
+		padding-left:40%!important;
+		margin-bottom:24px
+	}
+	table tbody tr td:last-child {
+		margin-bottom:0
+	}
+	table tbody tr td:before {
+		font-family:OpenSans-Regular;
+		font-size:14px;
+		color:#999;
+		line-height:1.2;
+		font-weight:unset;
+		position:absolute;
+		width:40%;
+		left:30px;
+		top:0
+	}
+	table tbody tr td:nth-child(1):before {
+		content:"ردیف"
+	}
+	table tbody tr td:nth-child(2):before {
+		content:"مقدار"
+	}
+	table tbody tr td:nth-child(3):before {
+		content:"شناسه"
+	}
+	table tbody tr td:nth-child(4):before {
+		content:"پرداخت شده"
+	}
+	table tbody tr td:nth-child(5):before {
+		content:"درگاه"
+	}
+	table tbody tr td:nth-child(6):before {
+		content:"کد پیگیری"
+	}
+	table tbody tr td:nth-child(7):before {
+		content:"تاریخ"
+	}
+	.column4,
+	.column5,
+	.column6 {
+		text-align:left
+	}
+	.column4,
+	.column5,
+	.column6,
+	.column1,
+	.column2,
+	.column3 {
+		width:100%
+	}
+	tbody tr {
+		font-size:14px
+	}
+}
+
 </style>
