@@ -3,7 +3,7 @@
 		<SideBar />
 		<div class="content">
 			<div class="container top-container">
-				<h1>پروفایل</h1>
+				<h2 class="mt-5 mb-4 bold">پروفایل</h2>
 				<div v-if="verified" class="col-md-6 border p-4 mt-4 shadow">
 
 					<label for="inputIdNumber" class="form-label my-2">کدملی</label>
