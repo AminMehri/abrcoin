@@ -43,18 +43,37 @@
 									<h5 class="modal-title" id="staticBackdropLabel">ثبت درخواست برداشت</h5>
 								</div>
 								<div class="modal-body">
-									{{walletsData}}
 
-									<input v-model="amount" type="text" class="form-control w-50 mx-auto" placeholder="مقدار (USDT)">
-								
-									<div class="modal-footer pb-0 mt-4">
+									<div v-if="!selectedWallet">
+										<p> کیف پول مورد نظر برای برداشت را انتخاب کنید: </p>
+										<div dir="ltr">
+											<div v-if="!walletsData[0]">
+												<router-link class="btn btn-primary px-4" to="/wallets"> افزودن کیف پول </router-link>
+											</div>
+											<button class="btn btn-primary w-100 d-block my-2 bold" v-for="wallet in walletsData" @click="selectedWallet = wallet">
+												{{wallet.address}} - ({{wallet.network}})
+											</button>
+										</div>
+									</div>
+
+									<div v-else>
+										<input v-model="amount" type="text" class="form-control w-50 mx-auto" placeholder="مقدار برداشت (USDT)">
+										<div dir="ltr" class="mt-4 text-center">
+											<span class="pointer text-secondary mx-auto" @click="selectedWallet = ''"> بازگشت </span>
+										</div>
+									</div>
+
+									<div class="modal-footer pb-0 mt-3">
 										<button id="closeButton" type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
-										<button v-if="!modalLoading" @click="createWithdraw" class="btn fw-bold bg-success text-light px-3">ثبت</button>
+										<button v-if="!modalLoading" @click="createWithdraw" class="btn fw-bold bg-success text-light px-3" :disabled="!selectedWallet && !amount">
+											ثبت
+										</button>
 										<button v-else class="btn fw-bold bg-success text-light px-2" disabled> 
 											ثبت
 											<span class="spinner-grow spinner-grow-sm text-dark"></span>
 										</button>
 									</div>
+
 								</div>
 						</div>
 					</div>
@@ -87,6 +106,7 @@ export default{
 		let modalLoading = ref(false)
 		let amount = ref('')
 		let network = ref('')
+		let selectedWallet = ref('')
 		
 
 		function getDepWithData(){
@@ -102,10 +122,10 @@ export default{
 				console.log(error.response)
 			})
 		}
-		function createWithdraw(wallet_id){
+		function createWithdraw(){
 			modalLoading.value = true
 			axios.post("financial/createWithdraw", {
-				"wallet_id": wallet_id, "amount": amount.value, "network": network.value
+				"wallet_id": selectedWallet.value.id, "amount": amount.value
 			}).then((res)=>{
 				modalLoading.value = false
 				alert(res.data.link)
@@ -116,6 +136,7 @@ export default{
 		}
 
 		function openModal(){
+			selectedWallet.value = ''
 			fullScreenLoading.value = true
 			axios
 			.get('wallet/list')
@@ -141,7 +162,8 @@ export default{
 			createWithdraw,
 			openModal,
 			fullScreenLoading,
-			walletsData
+			walletsData,
+			selectedWallet
 		}
 	}	
 }

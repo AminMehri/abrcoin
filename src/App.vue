@@ -88,6 +88,10 @@ a {
 	text-decoration: none !important;
 }
 
+.pointer{
+  cursor: pointer;
+}
+
 
 
 /* fullscreen loading */

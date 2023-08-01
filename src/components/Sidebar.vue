@@ -16,13 +16,13 @@
       پروفایل
     </router-link>
 
-    <a @click="collapseOpen = !collapseOpen" data-bs-toggle="collapse" href="#collapseExample" class="bg-hover">
+    <a @click="collapseOpen = !collapseOpen" data-bs-toggle="collapse" href="#sidebarCollapse" class="bg-hover">
       <i class="fa fa-coin"></i>
       مالی
       <i :class="{'fa-rotate-180': collapseOpen, 'fa fa-angle-down': true}"></i>
     </a>
     
-    <div class="collapse" id="collapseExample" style="background-color: rgb(115,115,115);">
+    <div class="collapse" id="sidebarCollapse" style="background-color: rgb(115,115,115);">
       <router-link class="bg-hover me-md-4" to="/deposit">
         <i class="fa fa-sign-in"></i>
         واریزها
