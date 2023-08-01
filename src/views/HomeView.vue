@@ -263,7 +263,9 @@ export default {
 </script>
 
 <style scoped>
-
+.home{
+	overflow-x: hidden;
+}
 .header-h1{
 	font-weight: 700;
 	line-height: 1.25;

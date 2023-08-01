@@ -41,7 +41,7 @@
       <i class="fa fa-headset"></i>
       تیکت ها
     </router-link>
-    <button class="btn btn-sm btn-danger px-3" @click="doLogout" style="margin-right: 42px; margin-top: 30px;">
+    <button class="btn btn-sm btn-danger px-3 exit-button" @click="doLogout" style="margin-right: 42px; margin-top: 30px;">
       خروج
     </button>
   </div>
@@ -149,15 +149,19 @@ export default {
   .top-container{margin-top: 4rem;}
 }
 
-@media screen and (max-width: 674px) {
+@media screen and (max-width: 700px) {
   .sidebar a {
     text-align: center;
     float: none;
   }
   .sidebar {
     position:static;
+    text-align: center;
   }
-  /* .top-container{margin-top: 16rem;} */
+  .exit-button{
+    margin: 15px auto !important;
+  }
+
 } 
 
 </style>
