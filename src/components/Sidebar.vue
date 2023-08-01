@@ -132,7 +132,7 @@ export default {
 }
 
 .content {
-  margin-right: 200px;
+  margin-right: 250px;
   padding: 1px 16px;
   height: 1000px;
 }

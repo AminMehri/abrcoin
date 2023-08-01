@@ -11,6 +11,8 @@ import WalletsView from '../views/WalletsView.vue'
 import WithdrawView from '../views/WithdrawView.vue'
 import DepositView from '../views/DepositView.vue'
 import SetPasswordView from '../views/SetPasswordView.vue'
+import TicketsView from '../views/TicketsView.vue'
+import SingleTicketView from '../views/SingleTicketView.vue'
 
 
 const routes = [
@@ -59,6 +61,18 @@ const routes = [
     path: '/withdraw',
     name: 'withdraw',
     component: WithdrawView,
+    meta: { loginRequired: true }
+  },
+  {
+    path: '/tickets',
+    name: 'tickets',
+    component: TicketsView,
+    meta: { loginRequired: true }
+  },
+  {
+    path: '/ticket/:id',
+    name: 'ticket',
+    component: SingleTicketView,
     meta: { loginRequired: true }
   },
   {
