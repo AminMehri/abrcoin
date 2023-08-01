@@ -41,9 +41,28 @@
       <i class="fa fa-headset"></i>
       تیکت ها
     </router-link>
-    <button class="btn btn-sm btn-danger px-3 exit-button" @click="doLogout" style="margin-right: 42px; margin-top: 30px;">
+    <button class="btn btn-sm btn-danger px-3 exit-button" data-bs-toggle="modal" data-bs-target="#confirmLogoutModal" style="margin-right: 42px; margin-top: 30px;">
       خروج
     </button>
+  </div>
+
+  <!-- cofirm logout modal -->
+  <div class="modal fade" id="confirmLogoutModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">خروج از حساب کاربری</h5>
+        </div>
+
+        <div class="row g-3">
+          <p>آیا از خروج از حساب خود مطمئن هستید؟</p>
+        </div>
+        <div class="modal-footer">
+          <button id="closeButtonLogout" type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
+          <button @click="doLogout" class="btn fw-bold bg-danger text-light">خروج</button>
+        </div>          
+      </div>
+    </div>
   </div>
 </template>
 
@@ -62,6 +81,7 @@ export default {
     let collapseOpen = ref(false)
 
 		function doLogout(){
+      document.getElementById('closeButtonLogout').click()
       store.commit('logout')
       router.push('/')
     }

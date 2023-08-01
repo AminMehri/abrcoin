@@ -66,7 +66,7 @@
 				<div class="col-lg-3 col-md-4 col-sm-6 col-8 mx-sm-0 mx-auto">
 
 					<div class="shadow-lg p-lg-4 p-md-3 p-sm-2 p-1">
-						<img src="../assets/simple.png" class="card-img-top w-75 " alt="...">
+						<img src="../assets/safety.png" class="card-img-top w-75 " alt="...">
 						<div class="card-body">
 						<h5 class="card-title my-3">امنیت</h5>
 						<hr class="w-50 mx-auto">
@@ -78,7 +78,7 @@
 				<div class="col-lg-3 col-md-4 col-sm-6 col-8 mx-sm-0 mx-auto">
 
 					<div class="shadow-lg p-lg-4 p-md-3 p-sm-2 p-1">
-						<img src="../assets/simple.png" class="card-img-top w-75 " alt="...">
+						<img src="../assets/variety.png" class="card-img-top w-75 " alt="...">
 						<div class="card-body">
 						<h5 class="card-title my-3">تنوع در خدمات</h5>
 						<hr class="w-50 mx-auto">
@@ -90,7 +90,7 @@
 				<div class="col-lg-3 col-md-4 col-sm-6 col-8 mx-sm-0 mx-auto">
 
 					<div class="shadow-lg p-lg-4 p-md-3 p-sm-2 p-1">
-						<img src="../assets/simple.png" class="card-img-top w-75 " alt="...">
+						<img src="../assets/comision.png" class="card-img-top w-75 " alt="...">
 						<div class="card-body">
 						<h5 class="card-title my-3">کارمزد رقابتی</h5>
 						<hr class="w-50 mx-auto">

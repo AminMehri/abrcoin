@@ -23,7 +23,8 @@
 							<td>{{wallet.address}}</td>
 							<td>{{ wallet.network }}</td>
 							<td>{{wallet.created_at}}</td>
-							<td><button @click="deleteWallet(wallet.id)" class="btn btn-danger" title="حذف"><i class="fa fa-trash"></i> </button></td>
+							<!-- <td><button @click="deleteWallet(wallet.id)" class="btn btn-danger" title="حذف"><i class="fa fa-trash"></i> </button></td> -->
+							<td><button @click="saveIdDelete(wallet.id)" class="btn btn-danger" title="حذف" data-bs-toggle="modal" data-bs-target="#deleteWalletModal"><i class="fa fa-trash"></i> </button></td>
 						</tr>
 					</tbody>
 				</table>
@@ -32,6 +33,7 @@
 					<button class="btn btn-info my-4 mx-auto" data-bs-toggle="modal" data-bs-target="#addWalletModal">اضافه کردن کیف</button>
 				</div>
 
+				<!-- add wallet modal -->
 				<div class="modal fade" id="addWalletModal" tabindex="-1">
 					<div class="modal-dialog">
 							<div class="modal-content">
@@ -73,6 +75,29 @@
 									</div>
 
 								</div>
+								
+						</div>
+					</div>
+				</div>
+				
+				<!-- cofirm delete modal -->
+				<div class="modal fade" id="deleteWalletModal" tabindex="-1">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="staticBackdropLabel">حذف کیف پول</h5>
+							</div>
+							<div v-if="!addWalletLoading" class="modal-body">
+
+								<div class="row g-3">
+									<p>آیا از حذف کیف پول خود مطمئن هستید؟</p>
+										
+								</div>
+								<div class="modal-footer">
+									<button id="closeButtonConfirmDelete" type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
+									<button @click="deleteWallet()" class="btn fw-bold bg-danger text-light">حذف کیف پول</button>
+								</div>
+							</div>
 								
 						</div>
 					</div>
@@ -148,11 +173,16 @@ export default {
 			})
 		}
 
-		function deleteWallet(walletId){
+		let deleteId = ref('')
+		function saveIdDelete(id){
+			deleteId.value = id
+		}
+
+		function deleteWallet(){
 			fullScreenLoading.value = true
 			axios
 			.post('wallet/remove', {
-				id: walletId,
+				id: deleteId.value,
 			})
 			.then(response => {
 				fullScreenLoading.value = false
@@ -169,6 +199,7 @@ export default {
 				fullScreenLoading.value = false
 				console.log(error.response)
 			})
+			document.getElementById('closeButtonConfirmDelete').click()
 		}
 
 
@@ -181,6 +212,7 @@ export default {
 			walDataLoading,
 			getWallets,
 			addWallet,
+			saveIdDelete,
 			deleteWallet,
 		}
 	}
