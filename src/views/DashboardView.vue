@@ -3,51 +3,45 @@
       <SideBar />
       <div class="content">
         <div class="container top-container">
-          <div class="row align-items-center">
-  
-            <div class="col-xl-12">
-              <div class="card border-0">
-                <div class="card-body text-center">
-                  <h2 class="card-title">فعالیت ها</h2>
-                </div>
-              </div>
+          <div class="mt-4">
+            <div v-if="profileData.name">
+              <i class="fa fa-user"></i> <span> {{profileData.name}} {{profileData.last_name}} </span> - 
+              <span class="text-muted">وضعیت:</span> {{auth_translate[profileData.authentication_status]}}
             </div>
-  
+            <div v-else>
+              <i class="fa fa-user"></i> <span> {{profileData.phone_number}} </span> - 
+              <span class="text-muted">وضعیت:</span> {{auth_translate[profileData.authentication_status]}}
+            </div>
           </div>
+          <hr>
+          <h2 class="bold mt-5 mb-4"> سوابق تریدها </h2>
+          
+          <!-- loading -->
+          <div v-if="tradeHistoryLoading" class="spinner-grow text-dark d-block mx-auto" role="status"></div>
 
-          <div class="row mt-1">
+          <table v-if="!tradeHistoryLoading" class="shadow mb-4">
+            <thead>
+              <tr>
+                <th scope="col">Symbol</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Profit</th>
+                <th scope="col">Profit Percent</th>
+                <th scope="col">Order id</th>
+                <th scope="col">Time</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="trade in tradeHistoryData">
+                <td scope="row">{{trade.symbol}}</td>
+                <td>{{trade.amount}}</td>
+                <td>{{trade.profit}}</td>
+                <td>{{trade.profit_percent}}</td>
+                <td>{{trade.order_id}}</td>
+                <td>{{trade.created_at}}</td>
+              </tr>
+            </tbody>
+          </table>
 
-            <div class="col-xl-6">
-
-              <!-- loading -->
-              <div v-if="tradeHistoryLoading" class="spinner-grow text-dark d-block mx-auto" role="status"></div>
-
-              <table v-if="!tradeHistoryLoading" class="table table-dark table-hover">
-                <thead>
-                  <tr>
-                    <th scope="col">نماد</th>
-                    <th scope="col">مقدار</th>
-                    <th scope="col">سود</th>
-                    <th scope="col">درصد سود</th>
-                    <th scope="col">آیدی درخواست</th>
-                    <th scope="col">زمان ساخت</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr v-for="trade in tradeHistoryData">
-                    <th scope="row">{{trade.symbol}}</th>
-                    <td>{{trade.amount}}</td>
-                    <td>{{trade.profit}}</td>
-                    <td>{{trade.profit_percent}}</td>
-                    <td>{{trade.order_id}}</td>
-                    <td>{{trade.created_at}}</td>
-                  </tr>
-                </tbody>
-              </table>       
-
-            </div>
-
-          </div>          
         </div>
       </div>
     </div>
@@ -71,7 +65,9 @@
       const router = useRouter()
 
       let tradeHistoryData = ref('')
+      let profileData = ref('')
       let tradeHistoryLoading = ref()
+      let auth_translate = {"No": "احراز هویت نشده", "Yes": "احراز هویت شده", "Pending": "درحال بررسی احراز هویت"}
 
       function getTradeHistory(){
         tradeHistoryLoading.value = true
@@ -86,11 +82,21 @@
           console.log(error.response)
         })
       }
+      function getProfileInfo(){
+        axios
+        .get('account/profile')
+        .then(response => {
+          profileData.value = response.data.data 
+        })
+      }
+	    getProfileInfo()
       getTradeHistory()
   
       return{
         tradeHistoryData,
         tradeHistoryLoading,
+        profileData,
+        auth_translate
       }
       
     }
@@ -165,4 +171,78 @@
     overflow-x: auto;
     white-space: nowrap;
   }	
+
+
+  @media screen and (max-width:992px) {
+ 	table {
+  		display:block
+ 	}
+	table>*,
+	table tr,
+	table td,
+	table th {
+		display:block;
+		word-break: break-all;
+	}
+	table thead {
+		display:none
+	}
+	table tbody tr {
+		height:auto;
+		padding:37px 0
+	}
+	table tbody tr td {
+		padding-left:40%!important;
+		margin-bottom:24px
+	}
+	table tbody tr td:last-child {
+		margin-bottom:0
+	}
+	table tbody tr td:before {
+		font-family:OpenSans-Regular;
+		font-size:14px;
+		color:#999;
+		line-height:1.2;
+		font-weight:unset;
+		position:absolute;
+		width:40%;
+		left:30px;
+		top:0
+	}
+	table tbody tr td:nth-child(1):before {
+		content:"Symbol"
+	}
+	table tbody tr td:nth-child(2):before {
+		content:"Amount"
+	}
+	table tbody tr td:nth-child(3):before {
+		content:"Profit"
+	}
+	table tbody tr td:nth-child(4):before {
+		content:"Profit Percent"
+	}
+	table tbody tr td:nth-child(5):before {
+		content:"Order id"
+	}
+	table tbody tr td:nth-child(6):before {
+		content:"Time"
+	}
+	.column4,
+	.column5,
+	.column6 {
+		text-align:left
+	}
+	.column4,
+	.column5,
+	.column6,
+	.column1,
+	.column2,
+	.column3 {
+		width:100%
+	}
+	tbody tr {
+		font-size:14px
+	}
+}
+
   </style>

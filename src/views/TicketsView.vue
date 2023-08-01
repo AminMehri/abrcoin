@@ -3,13 +3,12 @@
 		<SideBar />
 		<div class="content">
 			<div class="container top-container">
-				<h1>تیکت ها</h1>
-				<button class="btn btn-info mt-3 mb-1" data-bs-toggle="modal" data-bs-target="#staticBackdrop">ایجاد تیکت</button>
+				<h2 class="bold mt-5 mb-4">تیکت ها</h2>
 
 				<!-- loding -->
 				<div v-if="ConversationListLoading" class="spinner-grow text-dark d-block mx-auto" role="status"></div>
 
-				<table v-if="!ConversationListLoading" class="table">
+				<table v-if="!ConversationListLoading" class="shadow">
 					<thead>
 						<tr>
 							<th scope="col">#</th>
@@ -24,7 +23,10 @@
 						<tr v-for="conv,index in ConversationListData">
 							<th scope="row">{{index}}</th>
 							<td>{{conv.subject}}</td>
-							<td>{{conv.is_seen}}</td>
+							<td>
+								<i v-if="conv.is_seen" class="fa fa-circle-check text-success"></i>
+								<i v-else class="fa fa-times-circle text-danger"></i>
+							</td>
 							<td>{{conv.last_change}}</td>
 							<td>{{conv.status}}</td>
 							<td><router-link :to="`/ticket/${conv.id}`" class="btn btn-outline-primary">دیدن جزییات</router-link> </td>
@@ -32,6 +34,10 @@
 
 					</tbody>
 				</table>
+
+				<div class="d-flex">
+					<button class="btn btn-info my-4 mx-auto px-4" data-bs-toggle="modal" data-bs-target="#staticBackdrop">ایجاد تیکت</button>
+				</div>
 
 				<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 					<div class="modal-dialog">

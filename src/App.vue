@@ -285,7 +285,6 @@ tbody tr:nth-child(even) {
 }
 
 tbody tr {
-	font-family:OpenSans-Regular;
 	font-size:15px;
 	color:gray;
 	line-height:1.2;
