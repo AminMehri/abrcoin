@@ -10,7 +10,6 @@ import 'popper.js/dist/popper.min.js'
 import 'bootstrap/dist/js/bootstrap.bundle'
 import './assets/fontawesome/css/all.min.css'
 
-
 createApp(App).use(store).use(router).mount('#app')
 
 axios.defaults.baseURL = 'https://api.trademix.ir';

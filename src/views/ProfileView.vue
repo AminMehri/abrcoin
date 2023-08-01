@@ -27,6 +27,11 @@
 					<label for="inputAuthVerified" class="form-label my-2">وضعیت احراز هویت</label>
 					<input type="text" class="form-control" disabled :value="`${profileData.authentication_status}`" id="inputAuthVerified" >
 
+					<button v-if="showVerifybutton" class="btn fw-bold btn-outline-warning my-2 w-100" data-bs-toggle="modal" data-bs-target="#staticBackdrop">احراز هویت</button>
+					<button @click="verifyEmail()" v-if="!verifiedEmail" class="btn fw-bold btn-outline-info my-2 w-100">تایید ایمیل</button>
+
+
+
 				</div>
 
 				<div v-if="!verified" class="card col-md-6 border p-4 mt-4 shadow" aria-hidden="true">
@@ -143,13 +148,15 @@ export default {
 	let lastName = ref('')
 	let email = ref('')
 
+	
 	let updateFirstName = ref('')
 	let updateLastName = ref('')
 	let updateIdNumber = ref('')
 	let updateEmail = ref('')
 	
 	let updateInfoLoading = ref(false)
-
+	
+	let verifiedEmail = ref(false)
 	let showVerifybutton = ref(false)
 
 	function getProfileInfo(){
@@ -158,14 +165,19 @@ export default {
 		axios
 		.get('account/profile')
 		.then(response => {
-			verified.value = true
-			showVerifybutton.value = false
 			profileData.value = response.data.data 
-			console.log(profileData.value);
+			verified.value = true
+			if(profileData.value.email_verified){
+				verifiedEmail.value = true
+			}
+			if(profileData.value.authentication_status == 'No'){
+				showVerifybutton.value = true
+			}
+			console.log(profileData.value.authentication_status);
 		})
 		.catch(error => {
 			verified.value = false
-			showVerifybutton.value = true
+			// showVerifybutton.value = true
 			console.log(error.response);
 		})
 	}
@@ -211,10 +223,28 @@ export default {
 
 	}
 
+	function verifyEmail() {
+		axios
+		.post('account/sendVerifyEmail')
+		.then(response => {
+			Swal.fire({
+					icon: 'success',
+					title: 'ایمیل تایید برای شما فرستاده شد',
+					showConfirmButton: false,
+					backdrop: false,
+					timer: 1500,
+			});
+		})
+		.catch(error => {
+			console.log(error.response)
+		})
+	}
+
 
 
 	return{
 		verified,
+		verifiedEmail,
 		profileData,
 		idNumber,
 		firstName,
@@ -227,6 +257,7 @@ export default {
 		updateInfoLoading,
 		showVerifybutton,
 		updateInfo,
+		verifyEmail,
 	}
 	
   }
