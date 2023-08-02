@@ -3,25 +3,28 @@
 	  
 	  <div class="header-section">
 			<Navbar />
-			<header class="container section">
+			<iframe id="crypto-price" scrolling="no" allowtransparency="true" style="user-select: none; box-sizing: border-box; display: block; height: 46px; width: 100%;" src="https://s.tradingview.com/embed-widget/ticker-tape/?locale=en#{%22symbols%22:[{%22description%22:%22%22,%22proName%22:%22BINANCE:BTCUSDT%22},{%22description%22:%22%22,%22proName%22:%22BINANCE:ETHUSDT%22},{%22description%22:%22%22,%22proName%22:%22COINBASE:USDTUSD%22},{%22description%22:%22%22,%22proName%22:%22BINANCE:BNBUSDT%22},{%22description%22:%22%22,%22proName%22:%22BINANCE:XRPUSDT%22},{%22description%22:%22%22,%22proName%22:%22BINANCE:DOGEUSDT%22},{%22description%22:%22%22,%22proName%22:%22BINANCE:ADAUSDT%22},{%22description%22:%22%22,%22proName%22:%22BINANCE:SOLUSDT%22},{%22description%22:%22%22,%22proName%22:%22BINANCE:TRXUSDT%22},{%22description%22:%22%22,%22proName%22:%22BINANCE:LTCUSDT%22}],%22showSymbolLogo%22:true,%22colorTheme%22:%22light%22,%22isTransparent%22:false,%22displayMode%22:%22adaptive%22,%22width%22:%22100%25%22,%22height%22:46}" frameborder="0"></iframe>
+			<header class="container section mt-3">
 				<div class="row align-items-center">
-					<div class="col-md-6">
+					<div class="col-md-5">
 						<h1 class="header-h1 mb-5">صرافی و ربات آربیتراژ</h1>
 						<p>با ابرکوین به راحتی و بدون ریسک درآمد داشته باشید</p>
 						<router-link to="/register" class="btn btn-warning btn-rounded">ثبت نام</router-link>
 
 					</div>
-					<div class="col-md-6">
-						<img src="../assets/finance.png" class="img-fluid" alt="">
+					<div class="col-md-7">
+						<img src="../assets/bit.png" class="img-fluid" alt="">
 					</div>
 				</div>
 
 			</header>
 		</div>
-
-		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#cae6fa" fill-opacity="1" d="M0,224L0,32L180,32L180,96L360,96L360,64L540,64L540,64L720,64L720,160L900,160L900,288L1080,288L1080,224L1260,224L1260,288L1440,288L1440,320L1260,320L1260,320L1080,320L1080,320L900,320L900,320L720,320L720,320L540,320L540,320L360,320L360,320L180,320L180,320L0,320L0,320Z"></path></svg>
-
+		
 		<div class="why-section">
+			<svg width="25%" id="sw-js-blob-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">                    <defs>                         <linearGradient id="sw-gradient" x1="0" x2="1" y1="1" y2="0">                            <stop id="stop1" stop-color="rgba(205.253, 253.315, 255, 1)" offset="0%"></stop>                            <stop id="stop2" stop-color="rgba(214.365, 224.621, 230.714, 1)" offset="100%"></stop>                        </linearGradient>                    </defs>                <path fill="url(#sw-gradient)" d="M18.4,-16.6C24.6,-6.9,30.8,0.8,29.6,7.1C28.4,13.4,19.9,18.4,11.2,22.2C2.5,26,-6.2,28.6,-11.1,25.4C-16,22.1,-17,13.1,-18.4,4.8C-19.8,-3.5,-21.7,-11.2,-18.7,-20.1C-15.7,-29.1,-7.9,-39.3,-0.9,-38.6C6.1,-37.9,12.2,-26.3,18.4,-16.6Z" width="100%" height="100%" transform="translate(50 50)" style="transition: all 0.3s ease 0s;" stroke-width="0"></path>              </svg>
+			<svg width="25%" id="sw-js-blob-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">                    <defs>                         <linearGradient id="sw-gradient" x1="0" x2="1" y1="1" y2="0">                            <stop id="stop1" stop-color="rgba(0, 218.499, 226.161, 1)" offset="0%"></stop>                            <stop id="stop2" stop-color="rgba(172.263, 207.503, 228.437, 1)" offset="100%"></stop>                        </linearGradient>                    </defs>                <path fill="url(#sw-gradient)" d="M24.9,-32C30,-25.4,30.3,-15.4,32.4,-5.4C34.6,4.6,38.6,14.6,35,19.7C31.5,24.8,20.3,24.9,10.8,27.4C1.2,30,-6.6,34.9,-13.8,34C-20.9,33.1,-27.4,26.3,-30.3,18.7C-33.2,11.2,-32.6,2.8,-30.3,-4.5C-28.1,-11.8,-24.2,-18,-18.8,-24.5C-13.5,-31.1,-6.8,-38,1.6,-39.9C9.9,-41.8,19.8,-38.6,24.9,-32Z" width="100" height="100" transform="translate(50 50)" style="transition: all 0.3s ease 0s;" stroke-width="0"></path>              </svg>
+			<svg width="25%" id="sw-js-blob-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">                    <defs>                         <linearGradient id="sw-gradient" x1="0" x2="1" y1="1" y2="0">                            <stop id="stop1" stop-color="rgba(0, 218.499, 226.161, 1)" offset="0%"></stop>                            <stop id="stop2" stop-color="rgba(172.263, 207.503, 228.437, 1)" offset="100%"></stop>                        </linearGradient>                    </defs>                <path fill="url(#sw-gradient)" d="M18.4,-16.6C24.6,-6.9,30.8,0.8,29.6,7.1C28.4,13.4,19.9,18.4,11.2,22.2C2.5,26,-6.2,28.6,-11.1,25.4C-16,22.1,-17,13.1,-18.4,4.8C-19.8,-3.5,-21.7,-11.2,-18.7,-20.1C-15.7,-29.1,-7.9,-39.3,-0.9,-38.6C6.1,-37.9,12.2,-26.3,18.4,-16.6Z" width="100%" height="100%" transform="translate(50 50)" style="transition: all 0.3s ease 0s;" stroke-width="0"></path>              </svg>
+			<svg width="25%" id="sw-js-blob-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">                    <defs>                         <linearGradient id="sw-gradient" x1="0" x2="1" y1="1" y2="0">                            <stop id="stop1" stop-color="rgba(205.253, 253.315, 255, 1)" offset="0%"></stop>                            <stop id="stop2" stop-color="rgba(214.365, 224.621, 230.714, 1)" offset="100%"></stop>                        </linearGradient>                    </defs>                <path fill="url(#sw-gradient)" d="M18.6,-32.9C24,-29.2,28,-23.8,32.1,-18.1C36.2,-12.3,40.5,-6.2,41.2,0.4C41.9,7,39.1,14,34.2,18.4C29.3,22.8,22.3,24.6,16.3,26C10.2,27.4,5.1,28.3,0.7,27.2C-3.8,26,-7.5,22.8,-14.3,21.8C-21,20.8,-30.7,22.1,-34,18.8C-37.3,15.5,-34.3,7.8,-34.3,0C-34.3,-7.7,-37.2,-15.4,-35.3,-21.1C-33.3,-26.8,-26.5,-30.5,-19.8,-33.4C-13.1,-36.3,-6.6,-38.5,0,-38.5C6.6,-38.6,13.3,-36.6,18.6,-32.9Z" width="100%" height="100%" transform="translate(50 50)" style="transition: all 0.3s ease 0s;" stroke-width="0"></path>              </svg>
 			<div class="container">
 				<h1 class="why-abrcoin-title mb-5">چرا ابرکوین را انتخاب کنیم؟</h1>
 				<div class="row text-center">
@@ -78,7 +81,7 @@
 			</div>
 		</div>
 
-		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#cae6fa" fill-opacity="1" d="M0,64L16,90.7C32,117,64,171,96,160C128,149,160,75,192,58.7C224,43,256,85,288,117.3C320,149,352,171,384,165.3C416,160,448,128,480,101.3C512,75,544,53,576,48C608,43,640,53,672,80C704,107,736,149,768,186.7C800,224,832,256,864,234.7C896,213,928,139,960,122.7C992,107,1024,149,1056,138.7C1088,128,1120,64,1152,80C1184,96,1216,192,1248,213.3C1280,235,1312,181,1344,133.3C1376,85,1408,43,1424,21.3L1440,0L1440,0L1424,0C1408,0,1376,0,1344,0C1312,0,1280,0,1248,0C1216,0,1184,0,1152,0C1120,0,1088,0,1056,0C1024,0,992,0,960,0C928,0,896,0,864,0C832,0,800,0,768,0C736,0,704,0,672,0C640,0,608,0,576,0C544,0,512,0,480,0C448,0,416,0,384,0C352,0,320,0,288,0C256,0,224,0,192,0C160,0,128,0,96,0C64,0,32,0,16,0L0,0Z"></path></svg>
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#cae6fa" fill-opacity="1" d="M0,96L80,85.3C160,75,320,53,480,85.3C640,117,800,203,960,224C1120,245,1280,203,1360,181.3L1440,160L1440,0L1360,0C1280,0,1120,0,960,0C800,0,640,0,480,0C320,0,160,0,80,0L0,0Z"></path></svg>
 
 		<div class="container section">
 			<h1 class="why-abrcoin-title mb-5" id="faq">سوالات متداول</h1>
@@ -290,7 +293,14 @@ body {
 }
 
 .header-section {
-	background-color: #a4c7ff;
+	background-color: #14152f;
 	padding: 35px;
+	color: #cae6fa;
+}
+
+@media screen and (max-width: 830px) {
+	#crypto-price {
+		height: 100px !important;
+	}
 }
 </style>
