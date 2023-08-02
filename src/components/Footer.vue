@@ -1,11 +1,13 @@
 <template>
+	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#2176c1" fill-opacity="1" d="M0,192L1440,320L1440,320L0,320Z"></path></svg>
   <footer>
+	<div class="footer">
 		<div class="container mb-0">
 			<div class="row">
 
 				<div class="col-lg-4">
 					<img src="../assets/logo192.png" class="d-inline" width="30" alt="">
-					<h4 class="d-inline mx-1 fw-bold">ابرکوین</h4>
+					<h4 class="d-inline mx-1 bold">ابرکوین</h4>
 					<hr class="w-50">
 					<p>
 						بروکر اَبرکوین، با استفاده از کادر مجرب و حرفه‌ای در زمینه ارز دیجیتال و حوزه بلاکچین توانسته با ایجاد بستری مناسب برای علاقه‌مندان حوزه ارز دیجیتال شرایطی امن در جهت کسب سود بدون ریسک با 10 بروکر ارز دیجیتال معتبر جهانی به صورت کاملا حرفه ای سیستم آربیتراژ را راه اندازی کند و به صورت کاملا اتوماتیک اقدام به سودآوری نماید .
@@ -56,14 +58,20 @@
 		</div>
 		<hr>
 		<p class="text-center text-body-secondary">تمام حقوق این سایت متعلق به ابرکوین میباشد.</p>
+	</div>
 	</footer>
 </template>
 
 <style scoped>
 .blue-color {
-	color: rgb(100, 21, 255);
+	color: rgb(34, 0, 102);
 }
 #first-phone {
 	margin-top: 10rem !important;
+}
+.footer{
+	background-color: #2176c1;
+	padding: 25px;
+	color: aliceblue;
 }
 </style>

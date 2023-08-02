@@ -169,7 +169,7 @@
 
 		</div>
 
-		<div class="container section">
+		<div class="container">
 			<h1 class="why-abrcoin-title mb-5" id="news">آخرین اخبار و مقالات</h1>
 			<div class="row g-5">
 				
