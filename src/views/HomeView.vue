@@ -3,17 +3,17 @@
 	  
 	  <div class="header-section">
 			<Navbar />
-			<iframe id="crypto-price" scrolling="no" allowtransparency="true" style="user-select: none; box-sizing: border-box; display: block; height: 46px; width: 100%;" src="https://s.tradingview.com/embed-widget/ticker-tape/?locale=en#{%22symbols%22:[{%22description%22:%22%22,%22proName%22:%22BINANCE:BTCUSDT%22},{%22description%22:%22%22,%22proName%22:%22BINANCE:ETHUSDT%22},{%22description%22:%22%22,%22proName%22:%22COINBASE:USDTUSD%22},{%22description%22:%22%22,%22proName%22:%22BINANCE:BNBUSDT%22},{%22description%22:%22%22,%22proName%22:%22BINANCE:XRPUSDT%22},{%22description%22:%22%22,%22proName%22:%22BINANCE:DOGEUSDT%22},{%22description%22:%22%22,%22proName%22:%22BINANCE:ADAUSDT%22},{%22description%22:%22%22,%22proName%22:%22BINANCE:SOLUSDT%22},{%22description%22:%22%22,%22proName%22:%22BINANCE:TRXUSDT%22},{%22description%22:%22%22,%22proName%22:%22BINANCE:LTCUSDT%22}],%22showSymbolLogo%22:true,%22colorTheme%22:%22light%22,%22isTransparent%22:false,%22displayMode%22:%22adaptive%22,%22width%22:%22100%25%22,%22height%22:46}" frameborder="0"></iframe>
-			<header class="container section mt-3">
-				<div class="row align-items-center">
+			<iframe id="crypto-price" scrolling="no" allowtransparency="true" style="user-select: none; margin-bottom: 7rem; box-sizing: border-box; display: block; height: 46px; width: 100%;" src="https://s.tradingview.com/embed-widget/ticker-tape/?locale=en#{%22symbols%22:[{%22description%22:%22%22,%22proName%22:%22BINANCE:BTCUSDT%22},{%22description%22:%22%22,%22proName%22:%22BINANCE:ETHUSDT%22},{%22description%22:%22%22,%22proName%22:%22COINBASE:USDTUSD%22},{%22description%22:%22%22,%22proName%22:%22BINANCE:BNBUSDT%22},{%22description%22:%22%22,%22proName%22:%22BINANCE:XRPUSDT%22},{%22description%22:%22%22,%22proName%22:%22BINANCE:DOGEUSDT%22},{%22description%22:%22%22,%22proName%22:%22BINANCE:ADAUSDT%22},{%22description%22:%22%22,%22proName%22:%22BINANCE:SOLUSDT%22},{%22description%22:%22%22,%22proName%22:%22BINANCE:TRXUSDT%22},{%22description%22:%22%22,%22proName%22:%22BINANCE:LTCUSDT%22}],%22showSymbolLogo%22:true,%22colorTheme%22:%22light%22,%22isTransparent%22:false,%22displayMode%22:%22adaptive%22,%22width%22:%22100%25%22,%22height%22:46}" frameborder="0"></iframe>
+			<header class="container section">
+				<div class="row align-items-center g-0">
 					<div class="col-md-5">
-						<h1 class="header-h1 mb-5">صرافی و ربات آربیتراژ</h1>
+						<h1 class="header-h1 mb-5 bold">صرافی و ربات آربیتراژ</h1>
 						<p>با ابرکوین به راحتی و بدون ریسک درآمد داشته باشید</p>
-						<router-link to="/register" class="btn btn-warning btn-rounded">ثبت نام</router-link>
+						<router-link to="/register" class="btn btn-warning btn-rounded mb-4">ثبت نام</router-link>
 
 					</div>
 					<div class="col-md-7">
-						<img src="../assets/bit.png" class="img-fluid" alt="">
+						<img src="../assets/bit1.png" class="img-fluid header-image" alt="">
 					</div>
 				</div>
 
@@ -293,7 +293,8 @@ body {
 }
 
 .header-section {
-	background-color: #14152f;
+	/* background-color: #14152f; */
+	background-color: #2176c1;
 	padding: 35px;
 	color: #cae6fa;
 }
@@ -301,6 +302,22 @@ body {
 @media screen and (max-width: 830px) {
 	#crypto-price {
 		height: 100px !important;
+	}
+}
+
+#crypto-price {
+	z-index: 100;
+}
+
+@media screen and (min-width: 830px){
+	.header-image {
+		transform: scale(1.5);
+	}
+
+}
+@media screen and (max-width: 1410px){
+	.header-image {
+		transform: scale(1.2);
 	}
 }
 </style>
