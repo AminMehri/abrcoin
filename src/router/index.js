@@ -13,6 +13,10 @@ import DepositView from '../views/DepositView.vue'
 import SetPasswordView from '../views/SetPasswordView.vue'
 import TicketsView from '../views/TicketsView.vue'
 import SingleTicketView from '../views/SingleTicketView.vue'
+import AboutView from '../views/AboutView.vue'
+import ContactView from '../views/ContactView.vue'
+import ArticlesView from '../views/ArticlesView.vue'
+import SingleArticleView from '../views/SingleArticleView.vue'
 
 
 const routes = [
@@ -20,6 +24,26 @@ const routes = [
     path: '/',
     name: 'home',
     component: HomeView
+  },
+  {
+    path: '/about',
+    name: 'about',
+    component: AboutView
+  },
+  {
+    path: '/contact',
+    name: 'contact',
+    component: ContactView
+  },
+  {
+    path: '/articles',
+    name: 'articles',
+    component: ArticlesView
+  },
+  {
+    path: '/article/:slug',
+    name: 'single-article',
+    component: SingleArticleView
   },
   {
     path: '/login',

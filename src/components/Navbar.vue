@@ -11,19 +11,19 @@
 				<div class="collapse navbar-collapse" id="navbarNav">
 					<ul class="navbar-nav">
 						<li class="nav-item mx-2">
-							<router-link class="nav-link active" to="/s">صفحه اصلی</router-link>
+							<router-link class="nav-link active" to="/">صفحه اصلی</router-link>
 						</li>
 						<li class="nav-item mx-2">
-							<router-link class="nav-link" to="/">سوالات متداول</router-link>
+							<router-link class="nav-link" to="/articles">آخرین مقالات</router-link>
 						</li>
 						<li class="nav-item mx-2">
-							<router-link class="nav-link" to="/">آخرین اخبار</router-link>
+							<router-link class="nav-link" to="/contact">تماس با ما</router-link>
 						</li>
 						<li class="nav-item mx-2">
-							<router-link class="nav-link" to="/">تماس با ما</router-link>
+							<router-link class="nav-link" to="/about">درباره ما</router-link>
 						</li>
 						<li class="nav-item mx-2">
-							<router-link class="nav-link" to="/">درباره ما</router-link>
+							<router-link to="/dashboard" class="btn btn-outline-info btn-rounded mx-3 text-dark">پنل کاربری</router-link>
 						</li>
 					</ul>
 				</div>
