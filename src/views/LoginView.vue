@@ -37,6 +37,7 @@
 							:class="{'is-invalid':passwordE===true, 'is-valid':passwordE===false}"
 						>
 					</div>
+					<button type="button" @click="showPassword()" class="btn text-white mt-0 mb-3 thin">دیدن رمزعبور</button>
 
 					<router-link class="d-block" to="/register">حساب کاربری ندارید؟ ثبت نام کنید.</router-link>
 
@@ -147,6 +148,15 @@ export default {
 			})
 		}
 
+		function showPassword() {
+            let x = document.querySelector("#passwordInput");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+
 		return {
 			phoneNumber,
 			phoneNumberE,
@@ -157,6 +167,7 @@ export default {
 			email,
 			doLogin,
 			doForgetPassword,
+			showPassword,
 		}
 	}
 }
