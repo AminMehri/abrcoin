@@ -17,6 +17,7 @@ import AboutView from '../views/AboutView.vue'
 import ContactView from '../views/ContactView.vue'
 import ArticlesView from '../views/ArticlesView.vue'
 import SingleArticleView from '../views/SingleArticleView.vue'
+import NewFaceDash from '../views/newfacedash/DashboardView'
 
 
 const routes = [
@@ -108,6 +109,11 @@ const routes = [
     path: '/set-password/:token',
     name: 'set-password',
     component: SetPasswordView,
+  },
+  {
+    path: '/newfacedash',
+    name: 'newfacedash',
+    component: NewFaceDash,
   },
 ]
 
